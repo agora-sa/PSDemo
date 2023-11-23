@@ -37,13 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="SDK2.0 Demo"
+                android:text="PublicSecurity"
                 android:textSize="30sp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="50dp"
+                android:visibility="gone">
 
                 <AutoCompleteTextView
                     android:id="@+id/ip_view"
@@ -57,7 +58,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <AutoCompleteTextView
                     android:id="@+id/port"
@@ -71,7 +73,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <AutoCompleteTextView
                     android:id="@+id/username"
@@ -85,7 +88,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="invisible">
 
                 <EditText
                     android:id="@+id/password"
