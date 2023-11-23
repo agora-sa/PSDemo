@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorgray"
+              android:orientation="vertical"
+              tools:context="com.streamax.mmiddlewaredemo.BackupRealPlayActivity">
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorgray"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_video"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/button_openvideo"
+                android:enabled="false"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_switch_stream"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="子码流"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="静音"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_pause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="暂停"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_grab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="抓图"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_save_video"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="录制"
+                android:enabled="false"
+                android:visibility="gone"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_join"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_channel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="123456"
+                android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890 !#$%()+-:;&lt;=.>?@[]^_{}|~,&amp;"
+                android:hint="输入房间号" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_join"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="加入RTC房间" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_msg_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="数据返回区"/>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

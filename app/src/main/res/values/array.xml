@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="commond">
+        <item>Get device information</item>
+        <item>Set image parameters</item>
+        <item>Get device configuration parameters</item>
+        <item>Get temperature unit</item>
+        <item>General access parameters</item>
+        <item>TODO general setting parameters</item>
+        <item>Remote capture</item>
+        <item>Real-time status of equipment</item>
+        <item>Get IO status</item>
+        <item>Get device UTC time</item>
+        <item>Get device version information</item>
+        <item>Get user permissions</item>
+        <item>Upgrade file information acquisition</item>
+        <item>Reset</item>
+        <item>Get storage information</item>
+        <item>Get operation and maintenance status</item>
+        <item>Failure report</item>
+        <item>Historical fault daily report</item>
+        <item>Operation and maintenance verification</item>
+        <item>Get the hardware configuration table</item>
+        <item>Control hardware configuration table</item>
+        <item>Get file size</item>
+        <item>Video backup</item>
+        <item>Export file</item>
+        <item>Import file</item>
+        <item>Device upgrade</item>
+        <item>P2 upgrade</item>
+        <item>Upgrade RWatch</item>
+        <item>Upgrade GDS</item>
+        <item>Format the hard drive</item>
+        <item>Get the IPC version number</item>
+        <item>Get update file version information</item>
+        <item>Video file lock and unlock</item>
+        <item>Send the maintenance complete information to the device</item>
+        <item>Get server connection information</item>
+        <item>Export parameter file</item>
+        <item>Import parameter file</item>
+        <item>Six-axis data calibration</item>
+        <item>External six-axis sensor calibration</item>
+        <item>Device voice intercom test</item>
+        <item>Get device function status</item>
+        <item>AHD camera operation control</item>
+        <item>Set channel parameters</item>
+        <item>Vehicle lock</item>
+        <item>Get module information</item>
+        <item>Equipment management</item>
+        <item>Channel source settings</item>
+        <item>Channel signal source acquisition</item>
+        <item>File download-black box GPS</item>
+        <item>File download-black box maintenance record</item>
+        <item>Video download-download video to local</item>
+        <item>Video download-get download progress</item>
+    </string-array>
+</resources>

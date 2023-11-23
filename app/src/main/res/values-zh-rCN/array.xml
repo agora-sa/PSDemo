@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="commond">
+        <item>获取设备信息</item>
+        <item>设置图像参数</item>
+        <item>设备配置参数获取</item>
+        <item>获取温度单位</item>
+        <item>通用获取参数</item>
+        <item>TODO通用设置参数</item>
+        <item>远程抓图</item>
+        <item>设备实时状态</item>
+        <item>获取IO状态</item>
+        <item>获取设备UTC时间</item>
+        <item>获取设备版本信息</item>
+        <item>获取用户权限</item>
+        <item>升级文件信息获取</item>
+        <item>恢复出厂设置</item>
+        <item>获取存储信息</item>
+        <item>获取运维状态</item>
+        <item>故障日报表</item>
+        <item>历史故障日报表</item>
+        <item>运维验证</item>
+        <item>获取硬件配置表</item>
+        <item>控制硬件配置表</item>
+        <item>获取文件大小</item>
+        <item>视频备份</item>
+        <item>导出文件</item>
+        <item>导入文件</item>
+        <item>主机设备升级</item>
+        <item>P2升级</item>
+        <item>升级外设RWatch</item>
+        <item>升级外设GDS</item>
+        <item>格式化硬盘</item>
+        <item>获取IPC版本号</item>
+        <item>获取更新文件版本信息</item>
+        <item>视频文件锁定和解锁</item>
+        <item>下发维护文件完成到设备</item>
+        <item>获取服务器连接信息</item>
+        <item>导出参数文件</item>
+        <item>导入参数文件</item>
+        <item>六轴数据校准</item>
+        <item>外设六轴传感器校准</item>
+        <item>设备语音对讲测试</item>
+        <item>获取设备功能状态</item>
+        <item>AHD摄像头操作控制</item>
+        <item>设置通道参数</item>
+        <item>车辆锁定</item>
+        <item>获取模块信息</item>
+        <item>设备管理</item>
+        <item>通道信号源设置</item>
+        <item>通道信号源获取</item>
+        <item>文件下载-黑匣子GPS</item>
+        <item>文件下载-黑匣子维护记录</item>
+        <item>视频下载-下载视频到本地</item>
+        <item>视频下载-获取下载进度</item>
+    </string-array>
+</resources>

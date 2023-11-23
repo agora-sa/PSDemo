@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorgray"
+              android:orientation="vertical"
+              tools:context="com.streamax.mmiddlewaredemo.BackupRealPlayActivity"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_surface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorgray"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+
+                <com.streamax.mmiddlewaredemo.SDKSurfaceView
+                    android:id="@+id/nativesurfaceView3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_video"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/button_openvideo"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_switch_stream"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="子码流"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_sound"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="静音"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_pause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="暂停"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_grab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="抓图"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_save_video"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1sp"
+                android:layout_weight="0.5"
+                android:text="录制"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_msg_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="数据返回区"/>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

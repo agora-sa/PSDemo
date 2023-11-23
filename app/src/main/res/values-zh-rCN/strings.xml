@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">PublicSecurity</string>
+    <string name="button_login">login</string>
+    <string name="button_logout">logout</string>
+    <string name="button_openvideo">打开/推流</string>
+    <string name="button_openvideo_gpu">openGpu</string>
+    <string name="button_closevideo">关闭/离开</string>
+    <string name="button_playback">playback</string>
+    <string name="button_stopplayback">stopplay</string>
+    <string name="button_opensound">opensound</string>
+    <string name="button_closesound">closesound</string>
+    <string name="title_information">information:</string>
+    <string name="run_btn">Run</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_full_video">FullVideoActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_login">SDKDemo</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">设备IP</string>
+    <string name="prompt_port">端口</string>
+    <string name="prompt_username">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录...</string>
+    <string name="error_invalid_email">invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="preview">预览</string>
+    <string name="Playback">回放</string>
+    <string name="errorcode">错误码:</string>
+    <string name="response">返回信息:</string>
+</resources>
