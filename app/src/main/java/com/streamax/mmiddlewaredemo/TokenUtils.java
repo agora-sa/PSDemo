@@ -36,7 +36,7 @@ public class TokenUtils {
     }
 
     public static void gen(Context context, String channelName,  int uid, OnTokenGenCallback<String> onGetToken){
-        gen("8b8f5a8cd4469a63042fcfafe7063", "", channelName, uid, ret -> {
+        gen("d406cf8ebf784bc88fcd2cc399128b76", "", channelName, uid, ret -> {
             if(onGetToken != null){
                 runOnUiThread(() -> {
                     onGetToken.onTokenGen(ret);

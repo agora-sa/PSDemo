@@ -115,6 +115,20 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
         initOpreation();
         STVideoDecodeType.setDecodeType(STVideoDecodeType.HARD);
         initDataProcess();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onJoinChannel();
+            }
+        }, 200);
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onOpenVideo();
+            }
+        }, 300);
     }
 
     private void initEngine() {
