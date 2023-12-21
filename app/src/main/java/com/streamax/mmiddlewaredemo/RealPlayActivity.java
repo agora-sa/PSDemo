@@ -32,10 +32,15 @@ import com.streamax.common.STEnumType;
 import com.streamax.common.STVideoDecodeType;
 import com.streamax.localStream.LocalStream;
 import com.streamax.mmiddlewaredemo.dataprocess.FileUtils;
+import com.streamax.mmiddlewaredemo.dataprocess.FrameTypeParser;
 import com.streamax.netdevice.STNetDeviceCallback;
 import com.streamax.netdevice.devtype.STNetDevMsgType;
 import com.streamax.nxmapi.base.NXMSystemApi;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -48,6 +53,7 @@ import io.agora.rtc2.IRtcEngineEventHandler;
 import io.agora.rtc2.RtcEngine;
 import io.agora.rtc2.RtcEngineConfig;
 import io.agora.rtc2.RtcEngineEx;
+import io.agora.rtc2.audio.AudioTrackConfig;
 import io.agora.rtc2.proxy.LocalAccessPointConfiguration;
 import io.agora.rtc2.video.EncodedVideoFrameInfo;
 import io.agora.rtc2.video.VideoEncoderConfiguration;
@@ -62,6 +68,7 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
 
     private AppCompatEditText mChannelNameText;
     private AppCompatButton mChannelBtn;
+    private static FileOutputStream directSavePcmFos = null;
 
     private Button mSwitchBtn;
     private Button mVideoBtn;
@@ -94,6 +101,13 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
     private LocalStream mLocalStream;
     private boolean isH264;
     private int videoTrackId;
+    private int customAudioTrack = -1;
+
+    public static final int SAMPLE_RATE = 16000;
+    public static final int SAMPLE_NUM_OF_CHANNEL = 1;
+    public static final int BITS_PER_SAMPLE = 16;
+    private int pushVideoTimes;
+    private int pushTimes;
 
     private final static String USB_DIR = "/sdcard/Android/data/io.agora.publicsecurity/files";
     private final static String FILE_H264_FORMAT = "channel_%d.h264";
@@ -132,6 +146,17 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
             EncodedVideoTrackOptions opt = new EncodedVideoTrackOptions();
             opt.codecType = Constants.VIDEO_CODEC_H264;
             videoTrackId = engine.createCustomEncodedVideoTrack(opt);
+
+            AudioTrackConfig config1 = new AudioTrackConfig();
+            config1.enableLocalPlayback = false;
+            customAudioTrack = engine.createCustomAudioTrack(Constants.AudioTrackType.AUDIO_TRACK_MIXABLE, config1);
+
+            try {
+                File directSavePcmFile = new File("/sdcard/Android/data/io.agora.publicsecurity/files/output_direct.pcm");
+                directSavePcmFos = new FileOutputStream(directSavePcmFile, true); // 使用追加模式
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             onBackPressed();
@@ -211,6 +236,10 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (customAudioTrack != -1) {
+            engine.destroyCustomAudioTrack(customAudioTrack);
+            customAudioTrack = -1;
+        }
     }
 
     @Override
@@ -284,24 +313,34 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
 //            }
 
             mLocalStream = SDKManager.getInstance().getLocalStream();
-            mLocalStream.openWithStream(1, LocalStream.RecvDataTypeH264_SUB, (buffer, length) -> {
-                // Log.d(TAG, "---> onStreamData chn = 1, length = " + length);
+            mLocalStream.openWithStream(1, LocalStream.RecvDataTypeH264_SUB, (buffer, length, frameType, frame_pts) -> {
+                Log.d(TAG, "---> onStreamData chn = 1, length = " + length + ", frameType = " + frameType + ", frame_pts = " + frame_pts);
                 // 将摄像头采集到的数据保存成H264文件
                 // FileUtils.writeToFile(isH264?LocalStream.filterRMFrameHead(buffer):buffer,USB_DIR,String.format(FILE_H264_FORMAT,1),true,false);
 
-                // push key:4、push，但是必须要将数据转成Direct的
-                // 将摄像头采集到的数据转换成Direct的byteBuffer数据
-                byte[] newByte = LocalStream.filterRMFrameHead(buffer);
-                ByteBuffer byteBuffer = ByteBuffer.allocateDirect(newByte.length);
-                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-                byteBuffer.put(newByte);
-                byteBuffer.flip();
+                if (frameType == 0 || frameType == 1) {
+                    // push key:4、push，但是必须要将数据转成Direct的
+                    // 将摄像头采集到的数据转换成Direct的byteBuffer数据
+                    byte[] newByte = LocalStream.filterRMFrameHead(buffer);
+                    ByteBuffer byteBuffer = ByteBuffer.allocateDirect(newByte.length);
+                    byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+                    byteBuffer.put(newByte);
+                    byteBuffer.flip();
 
-                // 将摄像头采集到的数据push到声网的频道中
-                int ret = engine.pushExternalEncodedVideoFrameEx(byteBuffer, buildEncodedVideoFrame(), videoTrackId);
-                if (ret != Constants.ERR_OK) {
-                    Log.e(TAG, "pushExternalEncodedVideoFrame error: " + ret);
+                    // 将摄像头采集到的数据push到声网的频道中
+                    int ret = engine.pushExternalEncodedVideoFrameEx(byteBuffer, buildEncodedVideoFrame(), videoTrackId);
+                    Log.i(TAG, "pushExternalEncodedVideoFrameEx times:" + (++pushVideoTimes) + ", ret=" + ret);
+                    if (ret != Constants.ERR_OK) {
+                        Log.e(TAG, "pushExternalEncodedVideoFrame error: " + ret);
+                    }
+                } else if (frameType == 2) {
+                    // appendToPcmFileForByteArray(buffer);
+                    if(joined && engine != null && customAudioTrack != -1){
+                        int ret = engine.pushExternalAudioFrame(buffer, frame_pts, SAMPLE_RATE, SAMPLE_NUM_OF_CHANNEL, Constants.BytesPerSample.TWO_BYTES_PER_SAMPLE, customAudioTrack);
+                        Log.i(TAG, "pushExternalAudioFrame times:" + (++pushTimes) + ", ret=" + ret);
+                    }
                 }
+
             });
         }
         if (bOpenVideo) {
@@ -500,6 +539,8 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
 
     private void joinChannel() {
         if (isAccessPoint) {
+            engine.setParameters("{\"rtc.enableMultipath\":true}");
+
             engine.setParameters("{\"rtc.local_domain\":\"ap.1226191.agora.local\"}");
             LocalAccessPointConfiguration config = new LocalAccessPointConfiguration();
             ArrayList<String> iplist = new ArrayList<>();
@@ -535,6 +576,9 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
             option.publishCustomVideoTrack = true;
             // push key:3、不要忘记设置这个trackId，否则会返回-1
             option.customVideoTrackId = videoTrackId;
+
+            option.publishCustomAudioTrack = true;
+            option.publishCustomAudioTrackId = customAudioTrack;
             int res = engine.joinChannel(accessToken, mChannelId, 0, option);
             Log.d(TAG, "join channel res = " + res);
             if (res != 0) {
@@ -606,5 +650,13 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
         info.framesPerSecond = 15;
         info.frameType = 4;
         return info;
+    }
+
+    public static void appendToPcmFileForByteArray(byte[] pcmData) {
+        try {
+            directSavePcmFos.write(pcmData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

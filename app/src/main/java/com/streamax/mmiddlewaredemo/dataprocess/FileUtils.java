@@ -61,6 +61,10 @@ public class FileUtils {
         }
     }
 
+    public static void writeToPcm() {
+
+    }
+
     private boolean checkUDisk(){
         File uDir = new File("/mnt/usb_storage");
         return uDir.exists();
