@@ -129,6 +129,20 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
         initOpreation();
         STVideoDecodeType.setDecodeType(STVideoDecodeType.HARD);
         initDataProcess();
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onJoinChannel();
+            }
+        }, 200);
+
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onOpenVideo();
+            }
+        }, 300);
     }
 
     private void initEngine() {
@@ -579,7 +593,7 @@ public class RealPlayActivity extends AppCompatActivity implements STNetDeviceCa
 
             option.publishCustomAudioTrack = true;
             option.publishCustomAudioTrackId = customAudioTrack;
-            int res = engine.joinChannel(accessToken, mChannelId, 0, option);
+            int res = engine.joinChannel(accessToken, "12345678", 0, option);
             Log.d(TAG, "join channel res = " + res);
             if (res != 0) {
                 Toast.makeText(RealPlayActivity.this, "login failure=" + res, Toast.LENGTH_LONG).show();
